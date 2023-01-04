@@ -9,7 +9,7 @@ export default function SignIn() {
   const [userLogin, setUserLogin] = useState({email:"", password:""});
 const navigate = useNavigate();
 
-function handleLogin(e) {
+function handleSignIn(e) {
   setUserLogin({ ...userLogin, [e.target.name]: e.target.value});
 }
 function loginApp(e) {
@@ -22,12 +22,37 @@ function login(){
   const promise = axios.post(URL,userLogin);
   promise.then((res) => {
     setToken(res.data.token);
-    navigate("/");
+    navigate("/timeline");
   });
 
   promise.catch((err) => {
     alert(err.response.data.message);
   })
 }
-
+return (
+  <form onSubmit={loginApp}>
+      <input
+      name="email"
+      value={userLogin.email}
+      onChange={handleSignIn}
+      type="email"
+      placeholder="e-mail"
+      required
+      />
+       <input
+      name="password"
+      value={userLogin.password}
+      onChange={handleSignIn}
+      type="password"
+      placeholder="password"
+      required
+      />  
+      <button onClick={login} type="submit">
+        <h2>Log In</h2>
+        </button>  
+        <Link to={"/sign-up"}>
+          <h2>First time? Create an account!</h2>
+        </Link>
+  </form>
+);
 }
