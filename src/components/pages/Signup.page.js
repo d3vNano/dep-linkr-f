@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function SignUp() {
+export default function Signup() {
   const [userRegistration, setUserRegistration] = useState({email:"", password:"", username:"", picture_url:""});
 
   const navigate = useNavigate();
