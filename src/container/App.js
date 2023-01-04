@@ -8,8 +8,10 @@ import UsersPage from "./users/users.page";
 function App() {
     return (
         <BrowserRouter>
-            <>WEE</>
-            <Routes path="/user/:id" element={UsersPage}/>
+            <Routes>
+                <>WEE</>
+                <Route path="/user/:id" element={UsersPage}/>
+            </Routes>
         </BrowserRouter>
     );
 }
