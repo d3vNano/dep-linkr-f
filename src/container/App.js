@@ -6,6 +6,7 @@ import SignIn from "../components/pages/SignIn.page";
 import SignUp from "../components/pages/SignUp.page";
 import Timeline from "../components/pages/Timeline.page";
 import Hashtags from "../components/pages/Hashtags.page";
+import UserPage from "../components/pages/User.page";
 
 import "../assets/styles/reset.css";
 import "../assets/styles/style.css";
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/" element={<Timeline />} />
                     <Route path="/:hashtag" element={<Hashtags />} />
+                    <Route path="/user/:id" element={<UserPage />} />
                 </Routes>
             </View>
         </Router>
