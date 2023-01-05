@@ -8,6 +8,7 @@ import { useState } from "react";
 
 export default function SignIn() {
     const { setToken, token} = react.useContext(AuthContext);
+    const [disable, setDisable] = useState(false);
   const [userLogin, setUserLogin] = useState({email:"", password:""});
 const navigate = useNavigate();
 
@@ -20,19 +21,24 @@ function loginApp(e) {
 
 function login(){
   const URL = "http://localhost:4000/signin";
-
+setDisable(true)
   const promise = axios.post(URL,userLogin);
   promise.then((res) => {
+    setDisable(false)
     setToken(res.data.token);
     navigate("/timeline");
     localStorage.setItem("token",res.data.token);
   });
 
   promise.catch((err) => {
-    alert(err.response.data.message);
+    setDisable(false)
+    console.log(err);
+    //alert(err.response.data.message);
   })
 }
 return (
+    <Container>
+
   <form onSubmit={loginApp}>
       <input
       name="email"
@@ -40,7 +46,7 @@ return (
       onChange={handleSignIn}
       type="email"
       placeholder="e-mail"
-      required
+      
       />
        <input
       name="password"
@@ -48,14 +54,47 @@ return (
       onChange={handleSignIn}
       type="password"
       placeholder="password"
-      required
+
       />  
-      <button onClick={login} type="submit">
+      <button onClick={login} type="submit" disabled={disable}>
         <h2>Log In</h2>
         </button>  
         <Link to={"/sign-up"}>
           <h2>First time? Create an account!</h2>
         </Link>
   </form>
+      </Container>
 );
 }
+const Container = styled.main`
+display:flex;
+flex-direction:column;
+width: 375px;
+height: 667px;
+padding-left:40px;
+padding-top: 40px;
+input{
+    height: 65px;
+    width: 429px;
+    border-radius: 6px;
+    background-color:#FFFFFF;
+    top:317px;    
+    margin-top:8px;  
+}
+button{
+    height: 65px;
+    width: 429px;
+    left: 956px;
+    top: 473px;
+    border-radius: 6px;
+background-color:#1877F2; 
+margin-top:8px;   
+}h2{
+    height: 24px;
+width: 262px;
+left: 1044px;
+top: 560px;
+border-radius: nullpx;
+color:#FFFFFF;
+}
+`
