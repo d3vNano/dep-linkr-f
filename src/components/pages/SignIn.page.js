@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import react from 'react';
+import { AuthContext } from "../../container/providers/auth";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function Signin() {
-  const [token, setToken] = useState("");
+export default function SignIn() {
+    const { setToken, token} = react.useContext(AuthContext);
   const [userLogin, setUserLogin] = useState({email:"", password:""});
 const navigate = useNavigate();
 
@@ -23,6 +25,7 @@ function login(){
   promise.then((res) => {
     setToken(res.data.token);
     navigate("/timeline");
+    localStorage.setItem("token",res.data.token);
   });
 
   promise.catch((err) => {

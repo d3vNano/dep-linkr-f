@@ -4,9 +4,9 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Signup() {
+export default function SignUp() {
   const [userRegistration, setUserRegistration] = useState({email:"", password:"", username:"", picture_url:""});
-
+const [disable, setDisable] = useState(false)
   const navigate = useNavigate();
 
   function handleSignUp(e) {
@@ -20,13 +20,15 @@ export default function Signup() {
   function registration() {
 
     const URL = "http://localhost:4000/signup";
-
+setDisable(true)
     const promise = axios.post(URL, userRegistration);
     promise.then((res)=> {
+      setDisable(false)
 navigate("/");
     });
     promise.catch((err)=> {
-      console.log(err.response.data.message);
+      setDisable(false)
+      alert(err.response.data.message);
     });
   }
   return (
@@ -38,7 +40,7 @@ navigate("/");
       onChange={handleSignUp}
       type="email"
       placeholder="e-mail"
-      required
+ 
       />
        <input
       name="password"
@@ -46,15 +48,15 @@ navigate("/");
       onChange={handleSignUp}
       type="password"
       placeholder="password"
-      required
+   
       />
        <input
       name="username"
       value={userRegistration.username}
       onChange={handleSignUp}
       type="username"
-      placeholder="e-mail"
-      required
+      placeholder="username"
+     
       />
        <input
       name="picture_url"
@@ -62,14 +64,14 @@ navigate("/");
       onChange={handleSignUp}
       type="picture_url"
       placeholder="picture_url"
-      required
+     
       />
-      <button onClick={registration} type="submit">
+      <button onClick={registration} type="submit" disabled={disable}>
         <h2>Sign Up</h2>
       </button>
     </form>
     
-    <Link to="/login">
+    <Link to="/">
       <h2>Switch back to log in</h2>
     </Link>
     </>
