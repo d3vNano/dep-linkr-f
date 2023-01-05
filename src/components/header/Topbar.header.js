@@ -1,10 +1,19 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import Logout from "./Logout.header";
+import SearchBar from "./SearchBar.header";
+
+
+
 function Topbar (){
     return (
         <HeaderLayout>
-            <div>Aqui fica a logo</div>
-            <div>Aqui fica a barra de pesquisa</div>
-            <div>Aqui fica a foto do usuário</div>
+            
+            <LogoLayout>
+                <Link to={"/timeline"}>linkr</Link>
+            </LogoLayout>
+            <SearchBar/>
+            <Logout/>
         </HeaderLayout>
     )
 }
@@ -23,4 +32,17 @@ const HeaderLayout = styled.div `
     align-items: center;
 
     background-color: #151515;
+`
+const LogoLayout = styled.div`
+    a{
+        font-family: 'Passion One';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 49px;
+        line-height: 54px;
+
+        text-decoration:none;
+
+        color: #FFFFFF;
+    }
 `
