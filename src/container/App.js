@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import View from "../components/screens/View";
 
-import SignIn from "../components/pages/SignIn.page";
-import SignUp from "../components/pages/SignUp.page";
+import Signin from "../components/pages/SignIn.page";
+import Signup from "../components/pages/SignUp.page";
 import Timeline from "../components/pages/Timeline.page";
 import Hashtags from "../components/pages/Hashtags.page";
 import UserPage from "../components/pages/User.page";
@@ -16,9 +16,9 @@ function App() {
         <Router>
             <View>
                 <Routes>
-                    <Route path="/signin" element={<SignIn />} />
-                    <Route path="/signup" element={<SignUp />} />
-                    <Route path="/" element={<Timeline />} />
+                    <Route path="/" element={<Signin />} />
+                    <Route path="/sign-up" element={<Signup />} />
+                    <Route path="/timeline" element={<Timeline />} />
                     <Route path="/:hashtag" element={<Hashtags />} />
                     <Route path="/user/:id" element={<UserPage />} />
                 </Routes>
