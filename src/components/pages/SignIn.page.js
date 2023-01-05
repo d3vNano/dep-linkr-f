@@ -71,8 +71,6 @@ display:flex;
 flex-direction:column;
 width: 375px;
 height: 667px;
-padding-left:40px;
-padding-top: 40px;
 input{
     height: 65px;
     width: 429px;

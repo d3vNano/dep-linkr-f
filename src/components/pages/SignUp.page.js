@@ -32,7 +32,7 @@ navigate("/");
     });
   }
   return (
-    <>
+    <Container>
     <form onSubmit={signUpApp}>
       <input
       name="email"
@@ -74,6 +74,36 @@ navigate("/");
     <Link to="/">
       <h2>Switch back to log in</h2>
     </Link>
-    </>
+    </Container>
   )
 }
+const Container = styled.main`
+display:flex;
+flex-direction:column;
+width: 375px;
+height: 667px;
+input{
+    height: 65px;
+    width: 429px;
+    border-radius: 6px;
+    background-color:#FFFFFF;
+    top:317px;    
+    margin-top:8px;  
+}
+button{
+    height: 65px;
+    width: 429px;
+    left: 956px;
+    top: 473px;
+    border-radius: 6px;
+background-color:#1877F2; 
+margin-top:8px;   
+}h2{
+    height: 24px;
+width: 262px;
+left: 1044px;
+top: 560px;
+border-radius: nullpx;
+color:#FFFFFF;
+}
+`
