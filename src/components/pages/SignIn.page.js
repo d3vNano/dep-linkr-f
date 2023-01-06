@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function SignIn() {
-    const { setToken, token} = react.useContext(AuthContext);
+    const { setToken, username, picture_url,setusername, setPicture_url,userLogin, setUserLogin} = react.useContext(AuthContext);
     const [disable, setDisable] = useState(false);
-  const [userLogin, setUserLogin] = useState({email:"", password:""});
+
 const navigate = useNavigate();
 
 function handleSignIn(e) {
@@ -26,8 +26,12 @@ setDisable(true)
   promise.then((res) => {
     setDisable(false)
     setToken(res.data.token);
+    setusername(res.data.username)
+    setPicture_url(res.data.picture_url)
     navigate("/timeline");
     localStorage.setItem("token",res.data.token);
+    localStorage.setItem("username",res.data.username);
+    localStorage.setItem("picture_url", res.data.picture_url);
   });
 
   promise.catch((err) => {
@@ -63,6 +67,7 @@ return (
           <h2>First time? Create an account!</h2>
         </Link>
   </form>
+
       </Container>
 );
 }
