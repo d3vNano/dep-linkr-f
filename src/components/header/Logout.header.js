@@ -19,6 +19,7 @@ export default function Logout (){
 
 const LogoutLayout = styled.div`
 
+    width:90px;
     display:flex;
     align-items: center;
     justify-content: space-between;

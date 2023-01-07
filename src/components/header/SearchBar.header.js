@@ -1,49 +1,59 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {DebounceInput} from 'react-debounce-input';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { BsSearch } from 'react-icons/bs';
 
 export default function SearchBar (){
 
 
     const [search, setSearch] = useState("");
     const [result, setResult] = useState([]);
+    const [er, setEr]= useState("");
     
     useEffect(()=>{
         async function getUsernameSearch(){
-            if(search.username){
+            if (search.username && search.username.length>=3){
                 try {
                     const requisition = await axios.get(`http://localhost:4000/user/${search.username}`);
                     setResult(requisition.data);
+                    setEr("")
                 } catch (error) {
-                    console.log(error.response.data);
+                    if(error.response.status === 404){
+                        setEr(error.response.data);
+                        setResult([])
+                    }
                 };
-            };
+            }
+            else {
+                setResult([]);
+            }
         }
         getUsernameSearch();
-    },[search])
+    },[search]);
     
-    // function RenderUsernameResults({user_id, picture_url, username}){
-    //     return (
-    //             <Link key={user_id} to={`/user/${user_id}`}>
-    //                 <IconImage src={picture_url} alt={`picture at ${username}`}></IconImage>
-    //                 <UsernameBox className='username'>{username}</UsernameBox>
-    //             </Link>
-    //         )
-    // }
-
-
     function RenderUsernameResults({user_id, picture_url, username}){
         return (
-                <UsernameBox key={user_id}>
+            <UsernameBox key={user_id}>
+                <Link key={user_id} to={`/user/${user_id}`}>
                     <IconImage src={picture_url} alt={`picture at ${username}`}></IconImage>
-                    <span>{username}</span>
-                </UsernameBox>
+                    <span className='username'>{username}</span>
+                </Link>
+            </UsernameBox>
             )
     }
 
-    
+
+    // function RenderUsernameResults({user_id, picture_url, username}){
+    //     return (
+    //         <UsernameBox key={user_id}>
+    //             <IconImage src={picture_url} alt={`picture at ${username}`}></IconImage>
+    //             <span>{username}</span>
+    //         </UsernameBox>
+    //     )
+    // };
+
     return(
         <SearchBarLayout>
             <SpaceFromSearch>
@@ -55,17 +65,23 @@ export default function SearchBar (){
                         onChange={event => setSearch({username: event.target.value})} 
                         value={search.username}
                     />
+                    <BsSearch/>
                 </SearchBox>
                 <ResultLayout> 
-                    {result.map(value=>{                       
-                        const {id, picture_url, username} = value
+                    {er ?
+                        <UsernameBox>
+                            <span>{"Person was not found!"}</span>
+                        </UsernameBox>
+                        :
+                        result.map(value=>{                       
+                            const {id, picture_url, username} = value
 
-                        return(
-                            <RenderUsernameResults  key={id}
-                                                    user_id={id}
-                                                    picture_url={picture_url}
-                                                    username={username}
-                        />)
+                            return(
+                                <RenderUsernameResults  key={id}
+                                                        user_id={id}
+                                                        picture_url={picture_url}
+                                                        username={username}
+                            />)
                     })}
                 </ResultLayout>
             </SpaceFromSearch>
@@ -75,35 +91,87 @@ export default function SearchBar (){
 
 const SearchBarLayout = styled.div`
 
-    width: 563px;
+    width:100%;
+    position: absolute;
+    top: 13px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 `
 const SpaceFromSearch = styled.div`
-    background = blue;
+    max-width: 563px;
+    width: 50%;
+    min-width: 350px;
 
-    input{
-        width: 563px;
-        height: 45px;
-        background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 
-    }
+    border-radius: 8px;
+    background-color:#E7E7E7;
+
 `
 const SearchBox = styled.div`
-    background= yellow;
+    background-color: #FFFFFF;
+    width: 99.8%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    border-radius: 8px;
+
+    input{
+        width: 100%;
+        height: 32px;
+        border:none;
+        padding-left: 10px;
+    }
+
+    svg{
+        color: black;
+
+        width: 21px;
+        height: 21px;
+        margin: 10px
+    }
 `
 const ResultLayout = styled.div`
-    background = red;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 10px;
 `
+//colocar o treco q faz o texto n sair do espaço delimitado
 const UsernameBox = styled.div`
-    background = green
+
+    a{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-decoration:none;
+    
+        margin: 8px;
+    }
+
+    span{
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 19px;
+        line-height: 23px;
+        
+        color: #515151;
+    }
 `
 
 const IconImage = styled.img`
-    width: 53px;
-    height: 53px;
+    width: 42px;
+    height: 42px;
 
     border-radius: 26.5px;
     margin: 5px;
