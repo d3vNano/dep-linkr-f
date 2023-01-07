@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 import Logout from "./Logout.header";
 import SearchBar from "./SearchBar.header";
 
-
-
 function Topbar (){
     return (
-        <HeaderLayout>          
+        <HeaderLayout>
             <LogoLayout>
                 <Link to={"/timeline"}>linkr</Link>
             </LogoLayout>
@@ -20,7 +18,7 @@ function Topbar (){
 export default Topbar
 
 const HeaderLayout = styled.div `
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 72px;
     left: 0px;
@@ -34,8 +32,6 @@ const HeaderLayout = styled.div `
 `
 const LogoLayout = styled.div`
     a{
-        width: 108px;
-        height: 54px;
         font-family: 'Passion One';
         font-style: normal;
         font-weight: 700;

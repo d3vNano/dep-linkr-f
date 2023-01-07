@@ -7,7 +7,6 @@ import { BsSearch } from 'react-icons/bs';
 
 export default function SearchBar (){
 
-
     const [search, setSearch] = useState("");
     const [result, setResult] = useState([]);
     const [er, setEr]= useState("");
@@ -43,16 +42,6 @@ export default function SearchBar (){
             </UsernameBox>
             )
     }
-
-
-    // function RenderUsernameResults({user_id, picture_url, username}){
-    //     return (
-    //         <UsernameBox key={user_id}>
-    //             <IconImage src={picture_url} alt={`picture at ${username}`}></IconImage>
-    //             <span>{username}</span>
-    //         </UsernameBox>
-    //     )
-    // };
 
     return(
         <SearchBarLayout>
@@ -90,10 +79,10 @@ export default function SearchBar (){
 }
 
 const SearchBarLayout = styled.div`
-
-    width:100%;
     position: absolute;
     top: 13px;
+    right: 110px;
+    left: 110px;
 
     display: flex;
     flex-direction: column;

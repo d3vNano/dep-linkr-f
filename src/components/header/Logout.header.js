@@ -1,18 +1,16 @@
+import react from "react";
 import styled from "styled-components"
 import { SlArrowDown } from "react-icons/sl"
+import { AuthContext } from "../../container/providers/auth"
 
 export default function Logout (){
+    const {username, picture_url} = react.useContext(AuthContext);
 
-    //exemplo
-    const promisse={
-        username:"Vô rindo de nervoso",
-        profile_url:"https://t.ctcdn.com.br/uX_beBS4-td4TfPcWOEzb36vfyo=/720x405/smart/filters:format(webp)/i603337.jpeg"
-    }
 
     return (
         <LogoutLayout>  
             <SlArrowDown/>
-            <img src={promisse.profile_url} alt={`picture at ${promisse.username}`}></img>   
+            <img src={picture_url} alt={`picture of ${username}`}></img>   
         </LogoutLayout>
     )
 }
