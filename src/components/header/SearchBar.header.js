@@ -36,7 +36,7 @@ export default function SearchBar (){
         return (
             <UsernameBox key={user_id}>
                 <Link key={user_id} to={`/user/${user_id}`}>
-                    <IconImage src={picture_url} alt={`picture at ${username}`}></IconImage>
+                    <IconImage src={picture_url} alt={`picture of ${username}`}></IconImage>
                     <span className='username'>{username}</span>
                 </Link>
             </UsernameBox>
