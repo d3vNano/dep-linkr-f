@@ -1,10 +1,12 @@
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import Topbar from "../header/Topbar.header";
-import axios from "axios";
-import React, { useState, useEffect } from "react";
 import { AuthContext } from "../../container/providers/auth";
-import Post from "../post/Post";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import styled from "styled-components";
+
+import Topbar from "../header/Topbar.header";
+import Post from "../commun/Post";
+import Title from "../commun/Tittle";
 
 function UserPage() {
 
@@ -37,15 +39,13 @@ function UserPage() {
         getPostsFromUserId();
     },[id]);
 
-//{username, username_id, picture_url, id, link, description, likes}
-
     return (
         <>
             <Topbar/>
             <BodyLayout>
-                <span>{`${infoUser.username}'s posts`}</span>
+                <Title picture_url={infoUser.picture_url} username={infoUser.username}/>
                 <PostsBox>
-                    {
+                    {postsList.length > 0 ?
                         postsList.map(post =>{
                             const {description, id, likes, link} = post
                         
@@ -60,6 +60,8 @@ function UserPage() {
                                 />
                             )
                         })
+                        :
+                        <span>{`${infoUser.username} dont have posts`}</span>
                     }
                 </PostsBox>
 

@@ -13,9 +13,9 @@ export default function SearchBar (){
     
     useEffect(()=>{
         async function getUsernameSearch(){
-            if (search.username && search.username.length>=3){
+            if (search && search.length>=3){
                 try {
-                    const requisition = await axios.get(`http://localhost:4000/user/${search.username}`);
+                    const requisition = await axios.get(`http://localhost:4000/user/${search}`);
                     setResult(requisition.data);
                     setEr("")
                 } catch (error) {
@@ -31,11 +31,11 @@ export default function SearchBar (){
         }
         getUsernameSearch();
     },[search]);
-    
+
     function RenderUsernameResults({user_id, picture_url, username}){
         return (
             <UsernameBox key={user_id}>
-                <Link key={user_id} to={`/user/${user_id}`}>
+                <Link key={user_id} to={`/user/${user_id}`} onClick={()=> setSearch([])}>
                     <IconImage src={picture_url} alt={`picture of ${username}`}></IconImage>
                     <span className='username'>{username}</span>
                 </Link>
@@ -51,8 +51,8 @@ export default function SearchBar (){
                         placeholder="Search for people and friends"
                         minLength={3}
                         debounceTimeout={300}
-                        onChange={event => setSearch({username: event.target.value})} 
-                        value={search.username}
+                        onChange={event => setSearch(event.target.value)} 
+                        value={search}
                     />
                     <BsSearch/>
                 </SearchBox>
