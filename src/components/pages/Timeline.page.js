@@ -30,6 +30,8 @@ function Timeline() {
         getPostsList()
     },[])
 
+    
+
     console.log(postsList)
     return (
         <>
