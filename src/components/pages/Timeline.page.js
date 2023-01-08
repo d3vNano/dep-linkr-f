@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import Topbar from "../header/Topbar.header";
 import Title from "../commun/Tittle";
+import Post from "../commun/Post";
 
 function Timeline() {
 
@@ -20,7 +21,7 @@ function Timeline() {
                     "authorization": `Bearer ${token}`
                 }
             });
-            setPostList(requisition.response.data)
+            setPostList(requisition.data)
         } catch (error) {
             console.log(error.response.data)
         }
@@ -30,12 +31,29 @@ function Timeline() {
         getPostsList()
     },[])
 
-    console.log(postsList)
     return (
         <>
             <Topbar/>
             <BodyLayout>
-                <Title title={`Timeline`}/>              
+                <Title title={`Timeline`}/>
+                <PostsBox>
+                    {
+                        postsList.map(post => {
+                            const {id, link, description, user_id, likes, username, picture_url} = post
+
+                            return(
+                                <Post   key={id}
+                                        username_id={user_id}
+                                        picture_url={picture_url}
+                                        likes={likes}
+                                        username={username}
+                                        description={description}
+                                        link={link}
+                                />
+                            )
+                        })
+                    }
+                </PostsBox>         
             </BodyLayout>
         </>
     );
@@ -46,4 +64,8 @@ export default Timeline;
 const BodyLayout = styled.div`
     width:100%;
     margin: 90px auto auto auto;
+`
+const PostsBox = styled.div`
+    display: flex;
+    flex-direction: column;
 `

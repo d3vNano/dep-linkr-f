@@ -19,8 +19,7 @@ function App() {
                     <Route path="/" element={<Signin />} />
                     <Route path="/sign-up" element={<Signup />} />
                     <Route path="/timeline" element={<Timeline />} />
-                    <Route path="/hashtag" element={<Hashtags />} />
-                    <Route path="/hashtag/:hashtag" element={<PostsHashtags />} />
+                    <Route path="/hashtag/:hashtag" element={<Hashtags />} />
                     <Route path="/user/:id" element={<UserPage />} />
                 </Routes>
             </View>
