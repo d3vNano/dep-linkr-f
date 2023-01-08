@@ -31,6 +31,9 @@ function UserPage() {
             setUserId(requisition.data.id)
 
         } catch (error) {
+            alert(
+                "An error occured while trying to fetch the posts, please refresh the page"
+            )
             console.log(error.response.data)
         }
     }
@@ -43,28 +46,32 @@ function UserPage() {
         <>
             <Topbar/>
             <BodyLayout>
-                <Title picture_url={infoUser.picture_url} username={infoUser.username}/>
-                <PostsBox>
-                    {postsList.length > 0 ?
-                        postsList.map(post =>{
-                            const {description, id, likes, link} = post
+                <BodyBox>
+                    <Title picture_url={infoUser.picture_url} username={infoUser.username}/>
+                    <PostsBox>
+                        {postsList.length > 0 ?
+                            postsList.map(post =>{
+                                const {description, id, likes, link} = post
                         
-                            return(
-                                <Post   key={id}
-                                        username_id={userId}
-                                        picture_url={infoUser.picture_url}
-                                        likes={likes}
-                                        username={infoUser.username}
-                                        description={description}
-                                        link={link}
-                                />
-                            )
-                        })
-                        :
-                        <span>{`${infoUser.username} dont have posts`}</span>
-                    }
-                </PostsBox>
-
+                                return(
+                                    <Post   key={id}
+                                            username_id={userId}
+                                            picture_url={infoUser.picture_url}
+                                            likes={likes}
+                                            username={infoUser.username}
+                                            description={description}
+                                            link={link}
+                                    />
+                                )
+                            })
+                            :
+                            <span>{`Loading...`}</span>
+                        }
+                    </PostsBox>
+                </BodyBox>
+                <HashtagsBox>
+                    area das hashtags    
+                </HashtagsBox>   
             </BodyLayout>
         </>
     );
@@ -74,10 +81,41 @@ export default UserPage;
 
 const BodyLayout = styled.div`
     width:100%;
-    margin: 90px auto auto auto;
+    margin: 72px 25px 70px 25px;
+    display: flex;
+    justify-content: center;
+
+    @media(max-width:550px){
+        margin: 72px 0 0 0;
+    }
+`
+const BodyBox = styled.div`
+
+    width:100%;
+    max-width:611px;
+    min-width:375px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:53px;
 `
 
 const PostsBox = styled.div`
+    width:100%;
     display: flex;
     flex-direction: column;
+`
+
+const HashtagsBox = styled.div`
+    width:100%;
+    max-width:301px;
+    height: 406px;
+    background-color:black;
+    margin-left:25px;
+    margin-top:160px;
+
+    @media (max-width:650px){
+        display:none;
+    }
 `

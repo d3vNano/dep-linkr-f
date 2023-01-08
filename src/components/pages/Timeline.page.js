@@ -23,6 +23,9 @@ function Timeline() {
             });
             setPostList(requisition.data)
         } catch (error) {
+            alert(
+                "An error occured while trying to fetch the posts, please refresh the page"
+            )
             console.log(error.response.data)
         }
     }
@@ -31,29 +34,41 @@ function Timeline() {
         getPostsList()
     },[])
 
+
+
     return (
         <>
             <Topbar/>
             <BodyLayout>
-                <Title title={`Timeline`}/>
-                <PostsBox>
-                    {
-                        postsList.map(post => {
-                            const {id, link, description, user_id, likes, username, picture_url} = post
+                <BodyBox>
+                    <Title title={`Timeline`}/>
+                    <PublishBox>
+                        area do publish
+                    </PublishBox>
+                    <PostsBox>
+                        {postsList.length > 0 ?
+                            postsList.map(post => {
+                                const {id, link, description, user_id, likes, username, picture_url} = post
 
-                            return(
-                                <Post   key={id}
-                                        username_id={user_id}
-                                        picture_url={picture_url}
-                                        likes={likes}
-                                        username={username}
-                                        description={description}
-                                        link={link}
-                                />
-                            )
-                        })
-                    }
-                </PostsBox>         
+                                return(
+                                    <Post   key={id}
+                                            username_id={user_id}
+                                            picture_url={picture_url}
+                                            likes={likes}
+                                            username={username}
+                                            description={description}
+                                            link={link}
+                                    />
+                                )
+                            })
+                            :
+                            <span>{`Loading...`}</span>
+                        }
+                    </PostsBox>
+                </BodyBox>
+                <HashtagsBox>
+                    area das hashtags    
+                </HashtagsBox>         
             </BodyLayout>
         </>
     );
@@ -63,9 +78,53 @@ export default Timeline;
 
 const BodyLayout = styled.div`
     width:100%;
-    margin: 90px auto auto auto;
+    margin: 72px 25px 70px 25px;
+    display: flex;
+    justify-content: center;
+
+    @media(max-width:550px){
+        margin: 72px 0 0 0;
+    }
+`
+const BodyBox = styled.div`
+
+    width:100%;
+    max-width:611px;
+    min-width:375px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:53px;
+`
+
+const PublishBox = styled.div`
+
+    height:209px;
+    width:100%;
+
+    background-color: white;
+    color: black;
+
+    margin-bottom:29px;
 `
 const PostsBox = styled.div`
+    width:100%;
     display: flex;
     flex-direction: column;
 `
+
+const HashtagsBox = styled.div`
+    width:100%;
+    max-width:301px;
+    height: 406px;
+    background-color:black;
+    margin-left:25px;
+    margin-top:160px;
+
+    @media (max-width:650px){
+        display:none;
+    }
+`
+
+

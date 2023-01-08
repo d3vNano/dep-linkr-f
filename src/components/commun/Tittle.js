@@ -8,7 +8,7 @@ export default function Title ({title, picture_url, username}){
             :
             <div>
                 <img src={picture_url} alt={`picture of ${username}`}></img>
-                <h6>{username}</h6>
+                <h6>{`${username}'s posts`}</h6>
             </div>
             }
         </TitleBox>
@@ -16,8 +16,20 @@ export default function Title ({title, picture_url, username}){
 }
 
 const TitleBox = styled.div`
+
+    width:100%;
+    margin-bottom: 43px;
+
     div{
+        font-family: 'Oswald';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 43px;
+        line-height: 64px;
+        
         display:flex;
+        
+        align-items: center;
     }
     h6{
         font-family: 'Oswald';
@@ -33,5 +45,6 @@ const TitleBox = styled.div`
         width: 50px;
         height: 50px;
         border-radius: 26.5px;
+        margin: 15px;
     }
 `
