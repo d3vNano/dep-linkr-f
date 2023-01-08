@@ -31,7 +31,6 @@ export default function SearchBar (){
         }
         getUsernameSearch();
     },[search]);
-
     function RenderUsernameResults({user_id, picture_url, username}){
         return (
             <UsernameBox key={user_id}>
