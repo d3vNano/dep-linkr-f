@@ -7,7 +7,7 @@ import Signup from "../components/pages/SignUp.page";
 import Timeline from "../components/pages/Timeline.page";
 import Hashtags from "../components/pages/Hashtags.page";
 import UserPage from "../components/pages/User.page";
-
+import PostsHashtags from "../components/pages/PostsHashtags.page";
 import "../assets/styles/reset.css";
 import "../assets/styles/style.css";
 

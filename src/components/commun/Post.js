@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import React from "react";
+import { ReactTagify } from "react-tagify";
+import { useNavigate } from "react-router-dom";
 
 export default function Post({username, username_id, picture_url, id, link, description, likes}){
-
+    const navigate = useNavigate();
     return(
         <PostBox key={id}>
             <PopularityBox username_id={username_id}>
@@ -10,7 +13,18 @@ export default function Post({username, username_id, picture_url, id, link, desc
             </PopularityBox>
             <InfosBox>
                 <span>{username}</span>
-                <DescriptionBox>{description}</DescriptionBox>
+
+                <ReactTagify 
+        
+        tagClicked={(tag)=> navigate(`/hashtag/${tag.replace("#","")}`)}>
+      <DescriptionBox>{description}</DescriptionBox>
+      </ReactTagify>
+                 
+             
+            
+                                    
+                  
+            
                 <LinkBox>{link}</LinkBox>
             </InfosBox>
         </PostBox>

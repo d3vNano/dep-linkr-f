@@ -1,16 +1,37 @@
 import Topbar from "../header/Topbar.header";
 import styled from "styled-components";
 import Title from "../commun/Tittle";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
+//componente hashtag, renderizar na Timeline
 function Hashtags() {
-    const { hashtag } = useParams();
+    const [hashtags, setHashtags] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:4000/hashtags`)
+        .then((res)=> {
+            setHashtags(res.data)
+console.log(res.data)
+        })
+        ;
+    },[])
+
+
 
     return (
         <>
             <Topbar/>
             <BodyLayout>
-                <Title title={`# ${hashtag}`}/>              
+                {hashtags.map((h) => (
+                    <Link to={`/hashtag/${h.name}`} key={h.id}>
+                        <h2>{h.name}</h2>
+                    </Link>
+                ))}
+
+                    
+                                  
             </BodyLayout>
         </>
     );
