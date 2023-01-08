@@ -42,9 +42,13 @@ function Timeline() {
             <BodyLayout>
                 <BodyBox>
                     <Title title={`Timeline`}/>
-                    <PublishBox>
-                        area do publish
-                    </PublishBox>
+                        {postsList.length > 0 ?
+                            <PublishBox>
+                                area do publish
+                            </PublishBox>
+                        :
+                            <></>
+                        }
                     <PostsBox>
                         {postsList.length > 0 ?
                             postsList.map(post => {
@@ -67,7 +71,7 @@ function Timeline() {
                     </PostsBox>
                 </BodyBox>
                 <HashtagsBox>
-                    area das hashtags    
+                    <span>area das hashtags </span>   
                 </HashtagsBox>         
             </BodyLayout>
         </>
@@ -95,7 +99,13 @@ const BodyBox = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
     margin-top:53px;
+
+    span{
+        color:white;
+    }
+
 `
 
 const PublishBox = styled.div`
@@ -126,5 +136,4 @@ const HashtagsBox = styled.div`
         display:none;
     }
 `
-
 
