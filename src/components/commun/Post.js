@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Post({username, username_id, picture_url, id, link, description, likes}){
     const navigate = useNavigate();
+    
     return(
         <PostBox key={id}>
             <PopularityBox username_id={username_id}>
