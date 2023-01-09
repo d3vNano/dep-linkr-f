@@ -14,16 +14,17 @@ export default function PostsHashtags() {
       .get(`http://localhost:4000/hashtags?hashtag=${hashtag}`)
       .then((res) => {
         setFilterPosts(res.data);
-        console.log(res.data);
+        
       });
-  }, []);
-  console.log(filterPosts, "aa");
+  }, [hashtag]);
+
   return (
     <>
       <Topbar/>
         <BodyLayout>
           <BodyBox>
-            <Title username={hashtag}></Title>
+            <Title username={hashtag} title={`#${hashtag}`}></Title>
+           
             <PostsBox>
               {filterPosts.map((f) => {
                 const { id, link, description, user_id, likes , picture_url,username} = f;
