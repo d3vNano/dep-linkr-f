@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AuthContext } from "../../container/providers/auth";
 import axios from "axios";
 import styled from "styled-components";
-
+import Hashtags from "../commun/Hashtag.commun";
 import Topbar from "../header/Topbar.header";
 import Title from "../commun/Tittle";
 import Post from "../commun/Post";
@@ -71,7 +71,7 @@ function Timeline() {
                     </PostsBox>
                 </BodyBox>
                 <HashtagsBox>
-                    <span>area das hashtags </span>   
+                   <Hashtags/>   
                 </HashtagsBox>         
             </BodyLayout>
         </>
