@@ -14,10 +14,10 @@ export default function PostsHashtags() {
       .get(`http://localhost:4000/hashtags?hashtag=${hashtag}`)
       .then((res) => {
         setFilterPosts(res.data);
-        console.log(res.data);
+        
       });
-  }, []);
-  console.log(filterPosts, "aa");
+  }, [hashtag]);
+
   return (
     <>
       <Topbar/>
