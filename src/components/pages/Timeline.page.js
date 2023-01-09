@@ -51,27 +51,22 @@ function Timeline() {
                         <></>
                     )}
                     <PostsBox>
-                        {postsList.length > 0 ? (
-                            postsList.map((post) => {
-                                const {
-                                    id,
-                                    link,
-                                    description,
-                                    user_id,
-                                    likes,
-                                    username,
-                                    picture_url,
-                                } = post;
+                        {postsList.length > 0 ?
+                            postsList.map(post => {
+                                const {metaUrl, metaTitle, metaDescription, metaImage, id, link, description, user_id, likes, username, picture_url} = post
 
-                                return (
-                                    <Post
-                                        key={id}
-                                        username_id={user_id}
-                                        picture_url={picture_url}
-                                        likes={likes}
-                                        username={username}
-                                        description={description}
-                                        link={link}
+                                return(
+                                    <Post   key={id}
+                                            username_id={user_id}
+                                            picture_url={picture_url}
+                                            likes={likes}
+                                            username={username}
+                                            description={description}
+                                            link={link}
+                                            metaUrl={metaUrl} 
+                                            metaTitle={metaTitle} 
+                                            metaDescription={metaDescription} 
+                                            metaImage={metaImage}
                                     />
                                 );
                             })

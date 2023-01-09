@@ -2,8 +2,9 @@ import styled from "styled-components";
 import React from "react";
 import { ReactTagify } from "react-tagify";
 import { useNavigate } from "react-router-dom";
+import {SlHeart} from "react-icons/sl";
 
-export default function Post({username, username_id, picture_url, id, link, description, likes}){
+export default function Post({metaUrl, metaTitle, metaDescription, metaImage,username, username_id, picture_url, id, link, description, likes}){
     const navigate = useNavigate();
     return(
         <PostBox key={id}>
@@ -11,15 +12,18 @@ export default function Post({username, username_id, picture_url, id, link, desc
                 <img src={picture_url} alt={`picture of ${username}`}
                     onClick={() => navigate(`/user/${username_id}`)}
                 ></img>
+                <SlHeart/>
                 <div>{likes}</div>
             </PopularityBox>
             <InfosBox>
                 <span className="username" onClick={() => navigate(`/user/${username_id}`)}>{username}</span>
-                <ReactTagify 
+                <ReactTagify colors={"white"} font-weight={"bolder"}
                     tagClicked={(tag)=> navigate(`/hashtag/${tag.replace("#","")}`)}>
                     <DescriptionBox>{description}</DescriptionBox>
                 </ReactTagify>
-                <LinkBox>{link}</LinkBox>
+                <LinkBox>
+                <div></div>
+                </LinkBox>
             </InfosBox>
         </PostBox>
     )
@@ -35,6 +39,7 @@ const PostBox = styled.div`
     padding:15px;
     margin-bottom:15px;
     background: #171717;
+    border-radius:10px;
 
 `
 
@@ -51,6 +56,10 @@ const PopularityBox = styled.div`
         margin: 0px 15px 15px 0px;
         cursor: pointer;
     }
+    svg{
+        border-width:30px;
+        margin: 0px 0px 5px 17px;
+    }
     div{
         width: 50px;
         height: 50px;
@@ -63,7 +72,6 @@ const PopularityBox = styled.div`
 const InfosBox = styled.div`
     display:flex;
     flex-direction: column;
-
     width:100%;
 
     span{
@@ -96,9 +104,9 @@ const DescriptionBox = styled.div`
 const LinkBox = styled.div`
     width: 100%;
     height: 155px;
-
     border: 1px solid #4D4D4D;
     border-radius: 11px;
+
 
     cursor: pointer;
 `
