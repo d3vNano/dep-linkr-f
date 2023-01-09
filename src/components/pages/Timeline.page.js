@@ -52,7 +52,7 @@ function Timeline() {
                     <PostsBox>
                         {postsList.length > 0 ?
                             postsList.map(post => {
-                                const {id, link, description, user_id, likes, username, picture_url} = post
+                                const {metaUrl, metaTitle, metaDescription, metaImage, id, link, description, user_id, likes, username, picture_url} = post
 
                                 return(
                                     <Post   key={id}
@@ -62,6 +62,10 @@ function Timeline() {
                                             username={username}
                                             description={description}
                                             link={link}
+                                            metaUrl={metaUrl} 
+                                            metaTitle={metaTitle} 
+                                            metaDescription={metaDescription} 
+                                            metaImage={metaImage}
                                     />
                                 )
                             })

@@ -27,7 +27,7 @@ export default function PostsHashtags() {
            
             <PostsBox>
               {filterPosts.map((f) => {
-                const { id, link, description, user_id, likes , picture_url,username} = f;
+                const {metaUrl, metaTitle, metaDescription, metaImage, id, link, description, user_id, likes , picture_url,username} = f;
                 return (
                   
                   <Post
@@ -38,6 +38,10 @@ export default function PostsHashtags() {
                     username={username}
                     description={description}
                     link={link}
+                    metaUrl={metaUrl} 
+                    metaTitle={metaTitle} 
+                    metaDescription={metaDescription} 
+                    metaImage={metaImage}
                   />
                   );
               
