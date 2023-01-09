@@ -14,7 +14,7 @@ export default function Post({username, username_id, picture_url, id, link, desc
                 <div>{likes}</div>
             </PopularityBox>
             <InfosBox>
-                <span onClick={() => navigate(`/user/${username_id}`)}>{username}</span>
+                <span className="username" onClick={() => navigate(`/user/${username_id}`)}>{username}</span>
                 <ReactTagify 
                     tagClicked={(tag)=> navigate(`/hashtag/${tag.replace("#","")}`)}>
                     <DescriptionBox>{description}</DescriptionBox>
@@ -41,6 +41,7 @@ const PostBox = styled.div`
 const PopularityBox = styled.div`
     display: flex;
     flex-direction: column;
+    cursor:default;
 
     img{
         width: 50px;
@@ -48,6 +49,7 @@ const PopularityBox = styled.div`
     
         border-radius: 26.5px;
         margin: 0px 15px 15px 0px;
+        cursor: pointer;
     }
     div{
         width: 50px;
@@ -73,6 +75,9 @@ const InfosBox = styled.div`
         font-size: 19px;
         line-height: 23px;
     }
+    .username{
+        cursor: pointer;
+    }
 `
 
 const DescriptionBox = styled.div`
@@ -83,6 +88,8 @@ const DescriptionBox = styled.div`
     font-size: 17px;
     line-height: 20px;
 
+    cursor:default;
+
     color: #B7B7B7;
 `
 
@@ -92,4 +99,6 @@ const LinkBox = styled.div`
 
     border: 1px solid #4D4D4D;
     border-radius: 11px;
+
+    cursor: pointer;
 `
