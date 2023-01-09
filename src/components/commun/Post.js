@@ -8,11 +8,13 @@ export default function Post({username, username_id, picture_url, id, link, desc
     return(
         <PostBox key={id}>
             <PopularityBox username_id={username_id}>
-                <img src={picture_url} alt={`picture of ${username}`}></img>
+                <img src={picture_url} alt={`picture of ${username}`}
+                    onClick={() => navigate(`/user/${username_id}`)}
+                ></img>
                 <div>{likes}</div>
             </PopularityBox>
             <InfosBox>
-                <span>{username}</span>
+                <span onClick={() => navigate(`/user/${username_id}`)}>{username}</span>
                 <ReactTagify 
                     tagClicked={(tag)=> navigate(`/hashtag/${tag.replace("#","")}`)}>
                     <DescriptionBox>{description}</DescriptionBox>
