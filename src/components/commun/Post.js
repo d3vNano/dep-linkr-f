@@ -16,13 +16,19 @@ export default function Post({metaUrl, metaTitle, metaDescription, metaImage,use
                 <div>{likes}</div>
             </PopularityBox>
             <InfosBox>
-                <span className="username" onClick={() => navigate(`/user/${username_id}`)}>{username}</span>
+                <span  className="username" onClick={() => navigate(`/user/${username_id}`)}>{username}</span>
                 <ReactTagify colors={"white"} font-weight={"bolder"}
                     tagClicked={(tag)=> navigate(`/hashtag/${tag.replace("#","")}`)}>
                     <DescriptionBox>{description}</DescriptionBox>
                 </ReactTagify>
                 <LinkBox>
-                <div></div>
+<Metadata><h2>{metaTitle}</h2>
+<h4>{metaDescription}</h4>
+<h4>{metaUrl}</h4>
+
+</Metadata>
+
+<img src={metaImage} alt={""}></img>
                 </LinkBox>
             </InfosBox>
         </PostBox>
@@ -106,7 +112,14 @@ const LinkBox = styled.div`
     height: 155px;
     border: 1px solid #4D4D4D;
     border-radius: 11px;
-
-
+display:flex;
     cursor: pointer;
+
+
+    img{
+        height: 155px;
+width: 30%;
+border-radius:5px;
+margin-right:0;
+    }
 `
