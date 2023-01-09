@@ -10,7 +10,7 @@ export default function Hashtags() {
     const [filterPosts, setFilterPosts] = useState([]);
     const { hashtag } = useParams();
     useEffect(() => {
-      axios.get(`http://localhost:4000/hashtags?hashtag=${hashtag}`)
+      axios.get(`https://linkr-back-hll5.onrender.com/hashtags?hashtag=${hashtag}`)
       .then((res)=> {
         setFilterPosts(res.data)
         console.log(res.data)

@@ -11,7 +11,7 @@ export default function PostsHashtags() {
   const { hashtag } = useParams();
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/hashtags?hashtag=${hashtag}`)
+      .get(`https://linkr-back-hll5.onrender.com/hashtags?hashtag=${hashtag}`)
       .then((res) => {
         setFilterPosts(res.data);
         

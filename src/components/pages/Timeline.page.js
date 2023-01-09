@@ -16,7 +16,7 @@ function Timeline() {
     async function getPostsList() {
         try {
             const requisition = await axios.get(
-                `http://localhost:4000/timeline
+                `https://linkr-back-hll5.onrender.com/timeline
             `,
                 {
                     headers: {
