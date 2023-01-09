@@ -1,22 +1,54 @@
-import react from "react";
+import react, { useState } from "react";
 import styled from "styled-components"
-import { SlArrowDown } from "react-icons/sl"
+import { SlArrowDown, SlArrowUp } from "react-icons/sl"
 import { AuthContext } from "../../container/providers/auth"
+import { useNavigate } from "react-router-dom";
 
-export default function Logout (){
-    const {username, picture_url} = react.useContext(AuthContext);
+export default function Logout ({logoutIsOpen, setLogoutIsOpen}){
+    const {setusername, setPicture_url, username, picture_url, setToken} = react.useContext(AuthContext);
 
+const navigate = useNavigate();
 
+function logout(){
+    setToken("");
+    setusername("");
+    setPicture_url("");
+    localStorage.clear();
+    navigate("/");
+}
     return (
-        <LogoutLayout>  
+        <LogoutLayout onClick={()=> setLogoutIsOpen(!logoutIsOpen)}> 
+        {logoutIsOpen ?
+        <SlArrowUp/>:
             <SlArrowDown/>
-            <img src={picture_url} alt={`picture of ${username}`}></img>   
+        } 
+            <img src={picture_url} alt={`picture of ${username}`}></img>
+               {logoutIsOpen && <Popup onClick={logout}>Logout</Popup>}
         </LogoutLayout>
     )
 }
-
+const Popup = styled.div`
+width: 140px;
+height: 47px;
+background: #171717;
+border-radius: 0px 0px 0px 20px;
+overflow:hidden;
+position:absolute;
+top:67px;
+right:0px;
+font-family: 'Lato';
+font-style: normal;
+font-weight: 700;
+font-size: 17px;
+letter-spacing: 0.05em;
+color: #FFFFFF;
+display:flex;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+`
 const LogoutLayout = styled.div`
-
+position:relative;
     width:90px;
     display:flex;
     align-items: center;

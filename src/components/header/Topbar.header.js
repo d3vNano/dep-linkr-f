@@ -2,15 +2,16 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Logout from "./Logout.header";
 import SearchBar from "./SearchBar.header";
-
+import { useState } from "react";
 function Topbar (){
+const [logoutIsOpen, setLogoutIsOpen] = useState(false);
     return (
-        <HeaderLayout>
+        <HeaderLayout onClick={()=> logoutIsOpen && setLogoutIsOpen(false)}>
             <LogoLayout>
                 <Link to={"/timeline"}>linkr</Link>
             </LogoLayout>
             <SearchBar/>
-            <Logout/>
+            <Logout logoutIsOpen={logoutIsOpen} setLogoutIsOpen={setLogoutIsOpen}/>
         </HeaderLayout>
     )
 }

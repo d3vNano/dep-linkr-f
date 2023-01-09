@@ -23,7 +23,8 @@ export default function PostsHashtags() {
       <Topbar/>
         <BodyLayout>
           <BodyBox>
-            <Title username={hashtag}></Title>
+            <Title username={hashtag} title={`#${hashtag}`}></Title>
+           
             <PostsBox>
               {filterPosts.map((f) => {
                 const { id, link, description, user_id, likes , picture_url,username} = f;
