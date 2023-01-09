@@ -6,49 +6,50 @@ import Hashtags from "../commun/Hashtag.commun";
 import Topbar from "../header/Topbar.header";
 import Title from "../commun/Tittle";
 import Post from "../commun/Post";
+import Publish from "../commun/Publish";
 
 function Timeline() {
-
-    const {token} = React.useContext(AuthContext);
+    const { token } = React.useContext(AuthContext);
 
     const [postsList, setPostList] = useState([]);
 
-    async function getPostsList(){
+    async function getPostsList() {
         try {
-            const requisition= await axios.get(`http://localhost:4000/timeline
-            `,{
-                headers:{
-                    "authorization": `Bearer ${token}`
+            const requisition = await axios.get(
+                `http://localhost:4000/timeline
+            `,
+                {
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
                 }
-            });
-            setPostList(requisition.data)
+            );
+            setPostList(requisition.data);
         } catch (error) {
             alert(
                 "An error occured while trying to fetch the posts, please refresh the page"
-            )
-            console.log(error.response.data)
+            );
+            console.log(error.response.data);
         }
     }
 
-    useEffect(()=>{
-        getPostsList()
-    },[])
-
-
+    useEffect(() => {
+        getPostsList();
+    }, []);
 
     return (
         <>
-            <Topbar/>
+            <Topbar />
             <BodyLayout>
                 <BodyBox>
-                    <Title title={`Timeline`}/>
-                        {postsList.length > 0 ?
-                            <PublishBox>
-                                area do publish
-                            </PublishBox>
-                        :
-                            <></>
-                        }
+                    <Title title={`Timeline`} />
+                    {postsList.length > 0 ? (
+                        <PublishBox>
+                            <Publish />
+                        </PublishBox>
+                    ) : (
+                        <></>
+                    )}
                     <PostsBox>
                         {postsList.length > 0 ?
                             postsList.map(post => {
@@ -67,16 +68,16 @@ function Timeline() {
                                             metaDescription={metaDescription} 
                                             metaImage={metaImage}
                                     />
-                                )
+                                );
                             })
-                            :
+                        ) : (
                             <span>{`Loading...`}</span>
-                        }
+                        )}
                     </PostsBox>
                 </BodyBox>
                 <HashtagsBox>
-                   <Hashtags/>   
-                </HashtagsBox>         
+                    <Hashtags />
+                </HashtagsBox>
             </BodyLayout>
         </>
     );
@@ -85,59 +86,59 @@ function Timeline() {
 export default Timeline;
 
 const BodyLayout = styled.div`
-    width:100%;
+    width: 100%;
     margin: 72px 25px 70px 25px;
     display: flex;
     justify-content: center;
+    cursor:default;
 
-    @media(max-width:550px){
+    @media (max-width: 550px) {
         margin: 72px 0 0 0;
     }
-`
+`;
 const BodyBox = styled.div`
-
-    width:100%;
-    max-width:611px;
-    min-width:375px;
+    width: 100%;
+    max-width: 611px;
+    min-width: 375px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    margin-top:53px;
+    margin-top: 53px;
 
-    span{
-        color:white;
+    span {
+        color: white;
     }
-
-`
+`;
 
 const PublishBox = styled.div`
+    width: 100%;
+    height: 209px;
+    margin-bottom: 29px;
 
-    height:209px;
-    width:100%;
-
-    background-color: white;
-    color: black;
-
-    margin-bottom:29px;
-`
+    display: flex;
+`;
 const PostsBox = styled.div`
-    width:100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-`
+`;
 
 const HashtagsBox = styled.div`
-    width:100%;
-    max-width:301px;
+    width: 100%;
+    max-width: 301px;
     height: 406px;
+
     background-color:black;
     margin-left:25px;
     margin-top:160px;
+    background-color: #171717;
+    border-radius: 16px;
 
-    @media (max-width:650px){
-        display:none;
+
+
+    @media (max-width: 650px) {
+        display: none;
     }
-`
-
+`;
