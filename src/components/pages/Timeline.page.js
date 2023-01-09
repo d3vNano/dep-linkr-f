@@ -70,7 +70,7 @@ function Timeline() {
                                     />
                                 );
                             })
-                        ) : (
+                        : (
                             <span>{`Loading...`}</span>
                         )}
                     </PostsBox>
