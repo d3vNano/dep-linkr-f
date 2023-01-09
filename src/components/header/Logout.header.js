@@ -5,7 +5,7 @@ import { AuthContext } from "../../container/providers/auth"
 import { useNavigate } from "react-router-dom";
 
 export default function Logout ({logoutIsOpen, setLogoutIsOpen}){
-    const {setusername, setPicture_url, username, picture_url, setToken} = react.useContext(AuthContext);
+    const {setusername, setPicture_url, username, picture_url, setToken, setUser_id} = react.useContext(AuthContext);
 
 const navigate = useNavigate();
 
@@ -13,6 +13,7 @@ function logout(){
     setToken("");
     setusername("");
     setPicture_url("");
+    setUser_id("");
     localStorage.clear();
     navigate("/");
 }
@@ -53,6 +54,7 @@ position:relative;
     display:flex;
     align-items: center;
     justify-content: space-between;
+    cursor:pointer;
 
     svg {
         width: 18.38px;

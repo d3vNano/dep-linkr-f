@@ -85,6 +85,7 @@ const BodyLayout = styled.div`
     margin: 72px 25px 70px 25px;
     display: flex;
     justify-content: center;
+    cursor:default;
 
     @media(max-width:550px){
         margin: 72px 0 0 0;
@@ -131,6 +132,9 @@ const HashtagsBox = styled.div`
     background-color:black;
     margin-left:25px;
     margin-top:160px;
+    background-color: #171717;
+    border-radius: 16px;
+
 
     @media (max-width:650px){
         display:none;
