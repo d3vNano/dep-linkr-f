@@ -20,7 +20,7 @@ export default function PostsHashtags() {
   console.log(filterPosts, "aa");
   return (
     <>
-      <Topbar>
+      <Topbar/>
         <BodyLayout>
           <BodyBox>
             <Title username={hashtag}></Title>
@@ -44,7 +44,6 @@ export default function PostsHashtags() {
             </PostsBox>
           </BodyBox>
         </BodyLayout>
-      </Topbar>
     </>
   );
 }
