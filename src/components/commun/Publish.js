@@ -30,7 +30,7 @@ function Publish() {
         setDisabled(true);
 
         axios
-            .post("http://localhost:4000/post", post)
+            .post("https://linkr-back-hll5.onrender.com/post", post)
             .then((ans) => {
                 console.log(ans.data);
                 navigate("/");

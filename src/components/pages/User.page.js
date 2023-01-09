@@ -20,7 +20,7 @@ function UserPage() {
 
     async function getPostsFromUserId(){
         try {
-            const requisition = await axios.get(`http://localhost:4000/user/${id}/posts
+            const requisition = await axios.get(`https://linkr-back-hll5.onrender.com/user/${id}/posts
             `,{
                 headers:{
                     "authorization": `Bearer ${token}`
