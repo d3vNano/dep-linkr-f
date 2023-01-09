@@ -123,3 +123,7 @@ border-radius:5px;
 margin-right:0;
     }
 `
+const Metadata = styled.div`
+width: 70%;
+height:100%;
+`
