@@ -14,9 +14,9 @@ export default function PostsHashtags() {
       .get(`http://localhost:4000/hashtags?hashtag=${hashtag}`)
       .then((res) => {
         setFilterPosts(res.data);
-        
       });
-  }, [hashtag]);
+    }, [hashtag]);
+    console.log(filterPosts);
 
   return (
     <>

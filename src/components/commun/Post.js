@@ -1,18 +1,24 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useState } from "react";
 import { ReactTagify } from "react-tagify";
 import { useNavigate } from "react-router-dom";
-import {SlHeart} from "react-icons/sl";
+import {AiOutlineHeart} from "react-icons/ai";
+import {AiFillHeart} from "react-icons/ai";
+import axios from "axios";
 
 export default function Post({metaUrl, metaTitle, metaDescription, metaImage,username, username_id, picture_url, id, link, description, likes}){
     const navigate = useNavigate();
+    const [like, setLike] = useState(false);
+
     return(
         <PostBox key={id}>
             <PopularityBox username_id={username_id}>
                 <img src={picture_url} alt={`picture of ${username}`}
                     onClick={() => navigate(`/user/${username_id}`)}
                 ></img>
-                <SlHeart/>
+                {like === false ?
+                <AiOutlineHeart onClick={()=>setLike(true)} color={"#FFFFFF"}/> :
+                <AiFillHeart onClick={()=>setLike(false)} color={"#AC0000"}/>}
                 <div>{likes}</div>
             </PopularityBox>
             <InfosBox>
@@ -64,7 +70,9 @@ const PopularityBox = styled.div`
     }
     svg{
         border-width:30px;
-        margin: 0px 0px 5px 17px;
+        margin: 0px 0px 5px 12px;
+        font-size:30px;
+        cursor:pointer;
     }
     div{
         width: 50px;
