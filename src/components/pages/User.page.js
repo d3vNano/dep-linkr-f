@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Topbar from "../header/Topbar.header";
 import Post from "../commun/Post";
 import Title from "../commun/Tittle";
+import Hashtags from "../commun/Hashtag.commun";
 
 function UserPage() {
 
@@ -14,12 +15,18 @@ function UserPage() {
     const {token} = React.useContext(AuthContext)
 
     const [postsList, setPostList] = useState([]);
-    const [infoUser, setInfoUser] = useState([]);
+    const [infoUser, setInfoUser] = useState({});
     const [userId, setUserId] = useState("");
 
 
     async function getPostsFromUserId(){
         try {
+            // const requisition = await axios.get(`http://localhost:4000/user/${id}/posts
+            // `,{
+            //     headers:{
+            //         "authorization": `Bearer ${token}`
+            //     }
+            // });
             const requisition = await axios.get(`https://linkr-back-hll5.onrender.com/user/${id}/posts
             `,{
                 headers:{
@@ -42,17 +49,23 @@ function UserPage() {
         getPostsFromUserId();
     },[id]);
 
+
     return (
         <>
             <Topbar/>
             <BodyLayout>
                 <BodyBox>
+                    {!infoUser.username ?
+                        <span>{`Loading...`}</span>
+                    :
                     <Title picture_url={infoUser.picture_url} username={infoUser.username}/>
+                    }
                     <PostsBox>
-                        {postsList.length > 0 ?
+                        {postsList.length === 0 && infoUser.username ?
+                            <span>{`There are no posts yet`}</span>
+                            :
                             postsList.map(post =>{
-                                const {description, id, likes, link} = post
-                        
+                                const {description, id, likes, link} = post                     
                                 return(
                                     <Post   key={id}
                                             username_id={userId}
@@ -64,13 +77,11 @@ function UserPage() {
                                     />
                                 )
                             })
-                            :
-                            <span>{`Loading...`}</span>
                         }
                     </PostsBox>
                 </BodyBox>
                 <HashtagsBox>
-                    area das hashtags    
+                    <Hashtags/>    
                 </HashtagsBox>   
             </BodyLayout>
         </>
@@ -108,14 +119,19 @@ const PostsBox = styled.div`
 `
 
 const HashtagsBox = styled.div`
-    width:100%;
-    max-width:301px;
+    width: 100%;
+    max-width: 301px;
     height: 406px;
+
     background-color:black;
     margin-left:25px;
     margin-top:160px;
+    background-color: #171717;
+    border-radius: 16px;
 
-    @media (max-width:650px){
-        display:none;
+
+
+    @media (max-width: 650px) {
+        display: none;
     }
-`
+`;
