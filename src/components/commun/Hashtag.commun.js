@@ -8,7 +8,7 @@ function Hashtags() {
   const [hashtags, setHashtags] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/hashtags`).then((res) => {
+    axios.get(`https://linkr-back-hll5.onrender.com/hashtags`).then((res) => {
       setHashtags(res.data);
     });
   }, []);

@@ -19,7 +19,7 @@ const [disable, setDisable] = useState(false)
 
   function registration() {
 
-    const URL = "http://localhost:4000/signup";
+    const URL = "https://linkr-back-hll5.onrender.com/signup";
 setDisable(true)
     const promise = axios.post(URL, userRegistration);
     promise.then((res)=> {
