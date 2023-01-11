@@ -15,22 +15,27 @@ export default function SearchBar (){
         async function getUsernameSearch(){
             if (search && search.length>=3){
                 try {
-                    const requisition = await axios.get(`https://linkr-back-hll5.onrender.com/user/${search}`);
+                    //const requisition = await axios.get(`https://linkr-back-hll5.onrender.com/user/${search}`);
+                    const requisition = await axios.get(`http://localhost:4000/user/${search}`);
                     setResult(requisition.data);
                     setEr("")
                 } catch (error) {
                     if(error.response.status === 404){
                         setEr(error.response.data);
                         setResult([])
+                    } else{
+                        console.log(error.response.data)
                     }
                 };
             }
-            else {
+            else{
                 setResult([]);
+                setEr("");
             }
         }
         getUsernameSearch();
     },[search]);
+
     function RenderUsernameResults({user_id, picture_url, username}){
         return (
             <UsernameBox key={user_id}>
@@ -48,7 +53,8 @@ export default function SearchBar (){
                 <SearchBox>
                     <DebounceInput
                         placeholder="Search for people and friends"
-                        minLength={3}
+                        minLength={0}
+                        maxLength={50}
                         debounceTimeout={300}
                         onChange={event => setSearch(event.target.value)} 
                         value={search}
@@ -87,6 +93,12 @@ const SearchBarLayout = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @media (max-width:650px){
+        top:82px;
+        right: 10px;
+        left: 10px;
+    }
 `
 const SpaceFromSearch = styled.div`
     max-width: 563px;
@@ -100,6 +112,11 @@ const SpaceFromSearch = styled.div`
 
     border-radius: 8px;
     background-color:#E7E7E7;
+
+    @media (max-width:650px){
+        max-width:100%;
+        width: 100%;
+    }
 
 `
 const SearchBox = styled.div`
