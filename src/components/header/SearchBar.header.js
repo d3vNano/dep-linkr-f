@@ -15,8 +15,7 @@ export default function SearchBar (){
         async function getUsernameSearch(){
             if (search && search.length>=3){
                 try {
-                    //const requisition = await axios.get(`https://linkr-back-hll5.onrender.com/user/${search}`);
-                    const requisition = await axios.get(`http://localhost:4000/user/${search}`);
+                    const requisition = await axios.get(`https://linkr-back-hll5.onrender.com/user/${search}`);
                     setResult(requisition.data);
                     setEr("")
                 } catch (error) {
