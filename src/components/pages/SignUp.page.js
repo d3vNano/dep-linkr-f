@@ -40,7 +40,7 @@ navigate("/");
       <StyleForm>
 
     <form onSubmit={signUpApp}>
-      <input
+       <input
       name="email"
       value={userRegistration.email}
       onChange={handleSignUp}
@@ -72,9 +72,13 @@ navigate("/");
       placeholder="picture_url"
       
       />
-      <button onClick={registration} type="submit" disabled={disable}>
-        <h2>Sign Up</h2>
-      </button>
+      {disable ? 
+        <button className="Loading..."><h2>{`Loading...`}</h2></button>
+      :
+        <button onClick={registration} type="submit" disabled={disable}>
+          <h2>Sign Up</h2>
+        </button>
+      }
     </form>
     
     <Link to="/">

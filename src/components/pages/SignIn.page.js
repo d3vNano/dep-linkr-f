@@ -46,9 +46,10 @@ export default function SignIn() {
         promise.catch((err) => {
             setDisable(false);
             console.log(err);
-            //alert(err.response.data.message);
+            alert(err.response.data.message);
         });
     }
+    console.log(disable)
     return (
         <Container>
             <StyleDescription>
@@ -71,9 +72,13 @@ export default function SignIn() {
                         type="password"
                         placeholder="password"
                     />
-                    <button onClick={login} type="submit" disabled={disable}>
-                        <h2>Log In</h2>
-                    </button>
+                    {disable ? 
+                        <button className="Loading..."><h2>{`Loading...`}</h2></button>
+                    :
+                        <button onClick={login} type="submit" disabled={disable}>
+                            <h2>Log In</h2>
+                        </button>
+                    }
                     <Link to={"/sign-up"}>
                         <h2>First time? Create an account!</h2>
                     </Link>
@@ -203,6 +208,7 @@ const StyleForm = styled.div`
     h2 {
         text-decoration: underline #ffffff;
         text-align: center;
+        cursor:pointer;
 
         font-family: 'Lato';
         font-weight: 400;
@@ -219,6 +225,7 @@ const StyleForm = styled.div`
         border-radius: 6px;
         border: none;
         background-color: #1877f2;
+        cursor:pointer;
 
         h2{
             font-family: "Oswald";
