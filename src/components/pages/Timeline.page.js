@@ -10,13 +10,12 @@ import Publish from "../commun/Publish";
 
 function Timeline() {
     const { token } = React.useContext(AuthContext);
-
     const [postsList, setPostList] = useState([]);
-
+    const [countLike, setCountLike] = useState(0);
     async function getPostsList() {
         try {
             const requisition = await axios.get(
-                `https://linkr-back-hll5.onrender.com/timeline
+                `http://localhost:4000/timeline
             `,
                 {
                     headers: {
@@ -25,13 +24,15 @@ function Timeline() {
                 }
             );
             setPostList(requisition.data);
-        } catch (error) {
-            alert(
-                "An error occured while trying to fetch the posts, please refresh the page"
-            );
-            console.log(error.response.data);
-        }
-    }
+            
+            } catch (error) {
+                alert(
+                    "An error occured while trying to fetch the posts, please refresh the page"
+                    );
+                    console.log(error.response.data);
+                }
+            }
+            
 
     useEffect(() => {
         getPostsList();
@@ -53,13 +54,13 @@ function Timeline() {
                     <PostsBox>
                         {postsList.length > 0 ?
                             postsList.map(post => {
-                                const {metaUrl, metaTitle, metaDescription, metaImage, id, link, description, user_id, likes, username, picture_url} = post
+                                const {setCountLike, metaUrl, metaTitle, metaDescription, metaImage, id, link, description, user_id, count, username, picture_url} = post
 
                                 return(
                                     <Post   key={id}
                                             username_id={user_id}
                                             picture_url={picture_url}
-                                            likes={likes}
+                                            likes={countLike}
                                             username={username}
                                             description={description}
                                             link={link}

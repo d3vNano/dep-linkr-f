@@ -4,7 +4,6 @@ import { ReactTagify } from "react-tagify";
 import { useNavigate } from "react-router-dom";
 import {AiOutlineHeart} from "react-icons/ai";
 import {AiFillHeart} from "react-icons/ai";
-import axios from "axios";
 
 export default function Post({metaUrl, metaTitle, metaDescription, metaImage,username, username_id, picture_url, id, link, description, likes}){
     const navigate = useNavigate();
