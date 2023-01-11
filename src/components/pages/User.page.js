@@ -10,16 +10,14 @@ import Title from "../commun/Tittle";
 import Hashtags from "../commun/Hashtag.commun";
 
 function UserPage() {
-
     const { id } = useParams();
-    const {token} = React.useContext(AuthContext)
+    const { token } = React.useContext(AuthContext);
 
     const [postsList, setPostList] = useState([]);
     const [infoUser, setInfoUser] = useState({});
     const [userId, setUserId] = useState("");
 
-
-    async function getPostsFromUserId(){
+    async function getPostsFromUserId() {
         try {
             // const requisition = await axios.get(`http://localhost:4000/user/${id}/posts
             // `,{
@@ -27,62 +25,67 @@ function UserPage() {
             //         "authorization": `Bearer ${token}`
             //     }
             // });
-            const requisition = await axios.get(`https://linkr-back-hll5.onrender.com/user/${id}/posts
-            `,{
-                headers:{
-                    "authorization": `Bearer ${token}`
+            const requisition = await axios.get(
+                `${process.env.REACT_APP_HOST_URL}/user/${id}/posts
+            `,
+                {
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
                 }
-            });
-            setInfoUser(requisition.data)
-            setPostList(requisition.data.posts)
-            setUserId(requisition.data.id)
-
+            );
+            setInfoUser(requisition.data);
+            setPostList(requisition.data.posts);
+            setUserId(requisition.data.id);
         } catch (error) {
             alert(
                 "An error occured while trying to fetch the posts, please refresh the page"
-            )
-            console.log(error.response.data)
+            );
+            console.log(error.response.data);
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getPostsFromUserId();
-    },[id]);
-
+    }, [id]);
 
     return (
         <>
-            <Topbar/>
+            <Topbar />
             <BodyLayout>
                 <BodyBox>
-                    {!infoUser.username ?
+                    {!infoUser.username ? (
                         <span>{`Loading...`}</span>
-                    :
-                    <Title picture_url={infoUser.picture_url} username={infoUser.username}/>
-                    }
+                    ) : (
+                        <Title
+                            picture_url={infoUser.picture_url}
+                            username={infoUser.username}
+                        />
+                    )}
                     <PostsBox>
-                        {postsList.length === 0 && infoUser.username ?
+                        {postsList.length === 0 && infoUser.username ? (
                             <span>{`There are no posts yet`}</span>
-                            :
-                            postsList.map(post =>{
-                                const {description, id, likes, link} = post                     
-                                return(
-                                    <Post   key={id}
-                                            username_id={userId}
-                                            picture_url={infoUser.picture_url}
-                                            likes={likes}
-                                            username={infoUser.username}
-                                            description={description}
-                                            link={link}
+                        ) : (
+                            postsList.map((post) => {
+                                const { description, id, likes, link } = post;
+                                return (
+                                    <Post
+                                        key={id}
+                                        username_id={userId}
+                                        picture_url={infoUser.picture_url}
+                                        likes={likes}
+                                        username={infoUser.username}
+                                        description={description}
+                                        link={link}
                                     />
-                                )
+                                );
                             })
-                        }
+                        )}
                     </PostsBox>
                 </BodyBox>
                 <HashtagsBox>
-                    <Hashtags/>    
-                </HashtagsBox>   
+                    <Hashtags />
+                </HashtagsBox>
             </BodyLayout>
         </>
     );
@@ -91,45 +94,42 @@ function UserPage() {
 export default UserPage;
 
 const BodyLayout = styled.div`
-    width:100%;
+    width: 100%;
     margin: 72px 25px 70px 25px;
     display: flex;
     justify-content: center;
 
-    @media(max-width:550px){
+    @media (max-width: 550px) {
         margin: 72px 0 0 0;
     }
-`
+`;
 const BodyBox = styled.div`
-
-    width:100%;
-    max-width:611px;
-    min-width:375px;
+    width: 100%;
+    max-width: 611px;
+    min-width: 375px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top:53px;
-`
+    margin-top: 53px;
+`;
 
 const PostsBox = styled.div`
-    width:100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-`
+`;
 
 const HashtagsBox = styled.div`
     width: 100%;
     max-width: 301px;
     height: 406px;
 
-    background-color:black;
-    margin-left:25px;
-    margin-top:160px;
+    background-color: black;
+    margin-left: 25px;
+    margin-top: 160px;
     background-color: #171717;
     border-radius: 16px;
-
-
 
     @media (max-width: 650px) {
         display: none;

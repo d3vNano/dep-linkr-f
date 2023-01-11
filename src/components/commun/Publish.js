@@ -30,7 +30,7 @@ function Publish() {
         setDisabled(true);
 
         axios
-            .post("https://linkr-back-hll5.onrender.com/post", post)
+            .post(`${process.env.REACT_APP_HOST_URL}/post`, post)
             .then((ans) => {
                 console.log(ans.data);
                 navigate("/");

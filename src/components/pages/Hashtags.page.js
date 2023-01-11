@@ -10,15 +10,19 @@ export default function Hashtags() {
     const [filterPosts, setFilterPosts] = useState([]);
     const { hashtag } = useParams();
     useEffect(() => {
-      axios.get(`https://linkr-back-hll5.onrender.com/hashtags?hashtag=${hashtag}`)
-      .then((res)=> {
-        setFilterPosts(res.data)
-        console.log(res.data)
-      })
-      ;
-    },[hashtag])
-    console.log(hashtag,"aa");
-    return(<>
-    <h1>Oi</h1>
-    </>)
+        axios
+            .get(
+                `${process.env.REACT_APP_HOST_URL}/hashtags?hashtag=${hashtag}`
+            )
+            .then((res) => {
+                setFilterPosts(res.data);
+                console.log(res.data);
+            });
+    }, [hashtag]);
+    console.log(hashtag, "aa");
+    return (
+        <>
+            <h1>Oi</h1>
+        </>
+    );
 }
