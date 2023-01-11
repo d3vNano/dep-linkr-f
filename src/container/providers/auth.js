@@ -17,7 +17,6 @@ export const AuthProvider = (props) => {
     );
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [userLogin, setUserLogin] = useState({ email: "", password: "" });
-    console.log(username, picture_url);
 
     return (
         <AuthContext.Provider
