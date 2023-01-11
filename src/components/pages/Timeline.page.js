@@ -16,7 +16,7 @@ function Timeline() {
     async function getPostsList() {
         try {
             const requisition = await axios.get(
-                `https://linkr-back-hll5.onrender.com/timeline
+                `${process.env.REACT_APP_HOST_URL}/timeline
             `,
                 {
                     headers: {
@@ -51,26 +51,39 @@ function Timeline() {
                         <></>
                     )}
                     <PostsBox>
-                        {postsList.length > 0 ?
-                            postsList.map(post => {
-                                const {metaUrl, metaTitle, metaDescription, metaImage, id, link, description, user_id, likes, username, picture_url} = post
+                        {postsList.length > 0 ? (
+                            postsList.map((post) => {
+                                const {
+                                    metaUrl,
+                                    metaTitle,
+                                    metaDescription,
+                                    metaImage,
+                                    id,
+                                    link,
+                                    description,
+                                    user_id,
+                                    likes,
+                                    username,
+                                    picture_url,
+                                } = post;
 
-                                return(
-                                    <Post   key={id}
-                                            username_id={user_id}
-                                            picture_url={picture_url}
-                                            likes={likes}
-                                            username={username}
-                                            description={description}
-                                            link={link}
-                                            metaUrl={metaUrl} 
-                                            metaTitle={metaTitle} 
-                                            metaDescription={metaDescription} 
-                                            metaImage={metaImage}
+                                return (
+                                    <Post
+                                        key={id}
+                                        username_id={user_id}
+                                        picture_url={picture_url}
+                                        likes={likes}
+                                        username={username}
+                                        description={description}
+                                        link={link}
+                                        metaUrl={metaUrl}
+                                        metaTitle={metaTitle}
+                                        metaDescription={metaDescription}
+                                        metaImage={metaImage}
                                     />
                                 );
                             })
-                        : (
+                        ) : (
                             <span>{`Loading...`}</span>
                         )}
                     </PostsBox>
@@ -90,7 +103,7 @@ const BodyLayout = styled.div`
     margin: 72px 25px 70px 25px;
     display: flex;
     justify-content: center;
-    cursor:default;
+    cursor: default;
 
     @media (max-width: 550px) {
         margin: 72px 0 0 0;
@@ -130,13 +143,11 @@ const HashtagsBox = styled.div`
     max-width: 301px;
     height: 406px;
 
-    background-color:black;
-    margin-left:25px;
-    margin-top:160px;
+    background-color: black;
+    margin-left: 25px;
+    margin-top: 160px;
     background-color: #171717;
     border-radius: 16px;
-
-
 
     @media (max-width: 650px) {
         display: none;
