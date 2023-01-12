@@ -4,10 +4,34 @@ import { ReactTagify } from "react-tagify";
 import { useNavigate } from "react-router-dom";
 import {AiOutlineHeart} from "react-icons/ai";
 import {AiFillHeart} from "react-icons/ai";
+import axios from "axios";
+import react from "react";
+import { AuthContext } from "../../container/providers/auth";
 
-export default function Post({metaUrl, metaTitle, metaDescription, metaImage,username, username_id, picture_url, id, link, description, likes}){
+export default function Post({getPostsList,count, isLiked,metaUrl, metaTitle, metaDescription, metaImage,username, username_id, picture_url, id, link, description, likes}){
+    const {
+       user_id
+    } = react.useContext(AuthContext);
     const navigate = useNavigate();
     const [like, setLike] = useState(false);
+    const likePost = {
+        user_id: user_id,
+        post_id: id,  
+};
+
+console.log(likePost);
+    function likes() {
+        const URL = `${process.env.REACT_APP_HOST_URL}/likes`;
+        const promise = axios.post(URL, likePost);
+        promise.then((res) => {
+            setLike(!like);
+            getPostsList();
+            
+        });
+        promise.catch((err) => {
+            console.log(err.response);
+        });
+    }
 
     return(
         <PostBox key={id}>
@@ -15,10 +39,10 @@ export default function Post({metaUrl, metaTitle, metaDescription, metaImage,use
                 <img src={picture_url} alt={`picture of ${username}`}
                     onClick={() => navigate(`/user/${username_id}`)}
                 ></img>
-                {like === false ?
-                <AiOutlineHeart onClick={()=>setLike(true)} color={"#FFFFFF"}/> :
-                <AiFillHeart onClick={()=>setLike(false)} color={"#AC0000"}/>}
-                <div>{likes}</div>
+                {isLiked === false ?
+                <AiOutlineHeart onClick={likes} color={"#FFFFFF"}/> :
+                <AiFillHeart onClick={likes} color={"#AC0000"}/>}
+                <div>{count}</div>
             </PopularityBox>
             <InfosBox>
                 <span  className="username" onClick={() => navigate(`/user/${username_id}`)}>{username}</span>

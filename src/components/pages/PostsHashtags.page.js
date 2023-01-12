@@ -9,16 +9,21 @@ import Post from "../commun/Post";
 export default function PostsHashtags() {
     const [filterPosts, setFilterPosts] = useState([]);
     const { hashtag } = useParams();
-    useEffect(() => {
-        axios
-            .get(
-                `${process.env.REACT_APP_HOST_URL}/hashtags?hashtag=${hashtag}`
-            )
-            .then((res) => {
-                setFilterPosts(res.data);
-            });
-    }, [hashtag]);
 
+function getPostsList (){
+    axios
+    .get(
+        `${process.env.REACT_APP_HOST_URL}/hashtags?hashtag=${hashtag}`
+    )
+    .then((res) => {
+        setFilterPosts(res.data);
+    });
+}
+
+    useEffect(() => {
+      getPostsList(); 
+    }, [hashtag]);
+console.log(filterPosts, "filterPosts");
     return (
         <>
             <Topbar />
@@ -40,10 +45,12 @@ export default function PostsHashtags() {
                                 likes,
                                 picture_url,
                                 username,
+                                isLiked,
+                                count
                             } = f;
                             return (
                                 <Post
-                                    key={id}
+                                    id={id}
                                     username_id={user_id}
                                     picture_url={picture_url}
                                     likes={likes}
@@ -54,6 +61,9 @@ export default function PostsHashtags() {
                                     metaTitle={metaTitle}
                                     metaDescription={metaDescription}
                                     metaImage={metaImage}
+                                    isLiked={isLiked}
+                                        count={count}
+                                        getPostsList={getPostsList}
                                 />
                             );
                         })}
