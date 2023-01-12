@@ -11,8 +11,8 @@ function Publish() {
     const [post, setPost] = useState({
         link: "",
         description: "",
-        user_id,
     });
+
 
     const [disabled, setDisabled] = useState(false);
 
@@ -23,18 +23,23 @@ function Publish() {
         });
     }
 
+
+
     function submitForm(e) {
         e.preventDefault();
 
         setDisabled(true);
 
         axios
-            .post(`${process.env.REACT_APP_HOST_URL}/post`, post)
+            .post(`${process.env.REACT_APP_HOST_URL}/post`, {...post, user_id:user_id})
             .then((ans) => {
+                
                 document.location.reload(true);
             })
             .catch((err) => {
                 clearInputs();
+                console.log(err)
+                console.log(post)
                 setDisabled(false);
             });
     }

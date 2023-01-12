@@ -18,7 +18,6 @@ export default function Title ({title, picture_url, username}){
 const TitleBox = styled.div`
 
     width:100%;
-    margin-bottom: 43px;
 
     div{
         font-family: 'Oswald';
