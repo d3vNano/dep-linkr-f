@@ -32,8 +32,7 @@ function Publish() {
         axios
             .post(`${process.env.REACT_APP_HOST_URL}/post`, post)
             .then((ans) => {
-                console.log(ans.data);
-                navigate("/");
+                document.location.reload(true);
             })
             .catch((err) => {
                 clearInputs();
@@ -134,7 +133,7 @@ const InputLink = styled.input`
     }
 `;
 
-const InputDesc = styled.input`
+const InputDesc = styled.textarea`
     width: 100%;
     height: 65px;
     margin-bottom: 5px;
@@ -143,6 +142,8 @@ const InputDesc = styled.input`
     border: none;
     outline-color: #949494;
     background-color: #efefef;
+
+    resize: none;
 
     ::placeholder {
         color: #949494;

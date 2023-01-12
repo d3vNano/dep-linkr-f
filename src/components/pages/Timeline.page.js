@@ -43,13 +43,9 @@ function Timeline() {
             <BodyLayout>
                 <BodyBox>
                     <Title title={`Timeline`} />
-                    {postsList.length > 0 ? (
-                        <PublishBox>
-                            <Publish />
-                        </PublishBox>
-                    ) : (
-                        <></>
-                    )}
+                    <PublishBox>
+                        <Publish />
+                    </PublishBox>
                     <PostsBox>
                         {postsList.length > 0 ? (
                             postsList.map((post) => {
@@ -127,7 +123,7 @@ const BodyBox = styled.div`
 
 const PublishBox = styled.div`
     width: 100%;
-    height: 209px;
+    height: 100%;
     margin-bottom: 29px;
 
     display: flex;
