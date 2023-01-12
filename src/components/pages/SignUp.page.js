@@ -32,6 +32,7 @@ export default function SignUp() {
         const promise = axios.post(URL, userRegistration);
         promise.then((res) => {
             setDisable(false);
+            alert("Congratulations, account created successfully!");
             navigate("/");
         });
         promise.catch((err) => {

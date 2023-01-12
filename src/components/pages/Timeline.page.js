@@ -69,7 +69,6 @@ function Timeline() {
                   isLiked,
                   count
                             } = post;
-                console.log(id, "id");
                 return (
                   <Post
                     id={id}
@@ -132,9 +131,9 @@ const BodyBox = styled.div`
 `;
 
 const PublishBox = styled.div`
-  width: 100%;
-  height: 209px;
-  margin-bottom: 29px;
+    width: 100%;
+    height: 209px;
+    margin-bottom: 29px;
 
   display: flex;
 `;
