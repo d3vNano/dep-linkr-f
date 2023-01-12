@@ -38,6 +38,7 @@ export default function SignUp() {
         promise.catch((err) => {
             setDisable(false);
             alert(err.response.data.message);
+            console.log(err.response);
         });
     }
     return (
