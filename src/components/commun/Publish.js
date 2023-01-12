@@ -7,7 +7,6 @@ import { AuthContext } from "../../container/providers/auth";
 
 function Publish() {
     const { user_id, picture_url } = React.useContext(AuthContext);
-    const navigate = useNavigate();
 
     const [post, setPost] = useState({
         link: "",
