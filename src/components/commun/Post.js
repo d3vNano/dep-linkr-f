@@ -8,18 +8,20 @@ import axios from "axios";
 import react from "react";
 import { AuthContext } from "../../container/providers/auth";
 
-export default function Post({getPostsList,count, isLiked,metaUrl, metaTitle, metaDescription, metaImage,username, username_id, picture_url, id, link, description, likes}){
-    const {
-       user_id
-    } = react.useContext(AuthContext);
+export default function Post({  getPostsList,count, isLiked,metaUrl, 
+                                metaTitle, metaDescription, metaImage, 
+                                username, username_id, 
+                                picture_url, id, link, 
+                                description, likes
+                            }){
+
+    const {user_id} = react.useContext(AuthContext);
     const navigate = useNavigate();
     const [like, setLike] = useState(false);
-    const likePost = {
-        user_id: user_id,
-        post_id: id,  
-};
+    const likePost ={  user_id: user_id,
+                       post_id: id,  
+                    };
 
-console.log(likePost);
     function likes() {
         const URL = `${process.env.REACT_APP_HOST_URL}/likes`;
         const promise = axios.post(URL, likePost);
@@ -32,7 +34,6 @@ console.log(likePost);
             console.log(err.response);
         });
     }
-
     return(
         <PostBox key={id}>
             <PopularityBox username_id={username_id}>
@@ -45,19 +46,20 @@ console.log(likePost);
                 <div>{count}</div>
             </PopularityBox>
             <InfosBox>
-                <span  className="username" onClick={() => navigate(`/user/${username_id}`)}>{username}</span>
+                <span  className="username" onClick={() => navigate(`/user/${username_id}`)}>
+                    {username}
+                </span>
                 <ReactTagify colors={"white"} font-weight={"bolder"}
                     tagClicked={(tag)=> navigate(`/hashtag/${tag.replace("#","")}`)}>
                     <DescriptionBox>{description}</DescriptionBox>
                 </ReactTagify>
                 <LinkBox>
-<Metadata><h2>{metaTitle}</h2>
-<h4>{metaDescription}</h4>
-<h4>{metaUrl}</h4>
-
-</Metadata>
-
-<img src={metaImage} alt={""}></img>
+                    <Metadata>
+                        <h2>{metaTitle}</h2>
+                        <h4>{metaDescription}</h4>
+                        <h4>{metaUrl}</h4>
+                    </Metadata>
+                    <img src={metaImage} alt={""}></img>
                 </LinkBox>
             </InfosBox>
         </PostBox>

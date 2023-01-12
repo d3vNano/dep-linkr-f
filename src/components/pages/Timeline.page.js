@@ -12,7 +12,7 @@ function Timeline() {
   const { token ,} = React.useContext(AuthContext);
   const [postsList, setPostList] = useState([]);
   const [countLike, setCountLike] = useState(0);
-  console.log(postsList, "postlist");
+
   async function getPostsList() {
     try {
       const requisition = await axios.get(
@@ -25,7 +25,6 @@ function Timeline() {
         }
       );
       setPostList(requisition.data);
-      console.log("Entrou aqui");
     } catch (error) {
       alert(
         "An error occured while trying to fetch the posts, please refresh the page"
@@ -44,13 +43,16 @@ function Timeline() {
       <BodyLayout>
         <BodyBox>
           <Title title={`Timeline`} />
-          {postsList.length > 0 ? (
+          {/* {postsList.length > 0 ? (
             <PublishBox>
               <Publish />
             </PublishBox>
           ) : (
             <></>
-          )}
+          )} */}
+            <PublishBox>
+              <Publish />
+            </PublishBox>
           <PostsBox>
             {postsList.length > 0 ? (
               postsList.map((post) => {

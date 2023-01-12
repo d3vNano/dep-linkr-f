@@ -27,7 +27,6 @@ export default function SignUp() {
 
     function registration() {
         const URL = `${process.env.REACT_APP_HOST_URL}/signup`;
-        console.log(URL);
         setDisable(true);
         const promise = axios.post(URL, userRegistration);
         promise.then((res) => {
