@@ -10,8 +10,8 @@ import Publish from "../commun/Publish";
 
 function Timeline() {
     const { token } = React.useContext(AuthContext);
-
     const [postsList, setPostList] = useState([]);
+    const [countLike, setCountLike] = useState(0);
 
     async function getPostsList() {
         try {
@@ -124,7 +124,7 @@ const BodyBox = styled.div`
 
 const PublishBox = styled.div`
     width: 100%;
-    height: 100%;
+    height: 209px;
     margin-bottom: 29px;
 
     display: flex;

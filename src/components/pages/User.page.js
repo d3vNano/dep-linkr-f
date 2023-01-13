@@ -8,23 +8,20 @@ import Topbar from "../header/Topbar.header";
 import Post from "../commun/Post";
 import Title from "../commun/Tittle";
 import Hashtags from "../commun/Hashtag.commun";
+import ButtonFollow from "../commun/ButtonFollow.js";
 
 function UserPage() {
     const { id } = useParams();
-    const { token } = React.useContext(AuthContext);
+    const { token, user_id} = React.useContext(AuthContext);
 
     const [postsList, setPostList] = useState([]);
     const [infoUser, setInfoUser] = useState({});
-    const [userId, setUserId] = useState("");
-
+    const [userId, setUserId] = useState(0);
+    const [disabled, setDisabled] = useState(false);
+    const [followState, setFollowState] = useState(true);
+    
     async function getPostsFromUserId() {
         try {
-            // const requisition = await axios.get(`http://localhost:4000/user/${id}/posts
-            // `,{
-            //     headers:{
-            //         "authorization": `Bearer ${token}`
-            //     }
-            // });
             const requisition = await axios.get(
                 `${process.env.REACT_APP_HOST_URL}/user/${id}/posts
             `,
@@ -45,7 +42,20 @@ function UserPage() {
         }
     }
 
+    async function getFollowState(){
+        try {
+            const requisition = await axios.get(`${process.env.REACT_APP_HOST_URL}/follow/${user_id}/${id}`)  
+            
+            setFollowState(requisition.data.followExists)
+            console.log(requisition.data.followExists)
+        } catch (error) {
+            console.log(error)
+        }
+    
+    }
+
     useEffect(() => {
+        getFollowState();
         getPostsFromUserId();
     }, [id]);
 
@@ -57,10 +67,21 @@ function UserPage() {
                     {!infoUser.username ? (
                         <span>{`Loading...`}</span>
                     ) : (
+                        <>
                         <Title
                             picture_url={infoUser.picture_url}
                             username={infoUser.username}
                         />
+                        {id !== user_id &&
+                            <ButtonFollow user_id={user_id}
+                                          follow_user_id={id}
+                                          setDisabled={setDisabled}
+                                          disabled={disabled}
+                                          followState={followState}
+                                          setFollowState={setFollowState}
+                            />
+                        }
+                        </>
                     )}
                     <PostsBox>
                         {postsList.length === 0 && infoUser.username ? (

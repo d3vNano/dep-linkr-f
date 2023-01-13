@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useState } from "react";
 import { ReactTagify } from "react-tagify";
 import { useNavigate } from "react-router-dom";
 import { SlHeart } from "react-icons/sl";
