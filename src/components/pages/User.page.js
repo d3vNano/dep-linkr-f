@@ -12,14 +12,13 @@ import ButtonFollow from "../commun/ButtonFollow.js";
 
 function UserPage() {
     const { id } = useParams();
-    const { token, user_id} = React.useContext(AuthContext);
+    const { token, user_id } = React.useContext(AuthContext);
 
     const [postsList, setPostList] = useState([]);
     const [infoUser, setInfoUser] = useState({});
     const [userId, setUserId] = useState(0);
     const [disabled, setDisabled] = useState(false);
     const [followState, setFollowState] = useState(true);
-    
     async function getPostsFromUserId() {
         try {
             const requisition = await axios.get(
@@ -42,16 +41,17 @@ function UserPage() {
         }
     }
 
-    async function getFollowState(){
+    async function getFollowState() {
         try {
-            const requisition = await axios.get(`${process.env.REACT_APP_HOST_URL}/follow/${user_id}/${id}`)  
-            
-            setFollowState(requisition.data.followExists)
-            console.log(requisition.data.followExists)
+            const requisition = await axios.get(
+                `${process.env.REACT_APP_HOST_URL}/follow/${user_id}/${id}`
+            );
+
+            setFollowState(requisition.data.followExists);
+            console.log(requisition.data.followExists);
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    
     }
 
     useEffect(() => {
@@ -68,19 +68,20 @@ function UserPage() {
                         <span>{`Loading...`}</span>
                     ) : (
                         <>
-                        <Title
-                            picture_url={infoUser.picture_url}
-                            username={infoUser.username}
-                        />
-                        {id !== user_id &&
-                            <ButtonFollow user_id={user_id}
-                                          follow_user_id={id}
-                                          setDisabled={setDisabled}
-                                          disabled={disabled}
-                                          followState={followState}
-                                          setFollowState={setFollowState}
+                            <Title
+                                picture_url={infoUser.picture_url}
+                                username={infoUser.username}
                             />
-                        }
+                            {id !== user_id && (
+                                <ButtonFollow
+                                    user_id={user_id}
+                                    follow_user_id={id}
+                                    setDisabled={setDisabled}
+                                    disabled={disabled}
+                                    followState={followState}
+                                    setFollowState={setFollowState}
+                                />
+                            )}
                         </>
                     )}
                     <PostsBox>

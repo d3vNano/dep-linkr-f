@@ -15,6 +15,7 @@ export const AuthProvider = (props) => {
     const [picture_url, setPicture_url] = useState(
         localStorage.getItem("picture_url")
     );
+
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [userLogin, setUserLogin] = useState({ email: "", password: "" });
 

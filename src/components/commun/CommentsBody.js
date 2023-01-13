@@ -1,26 +1,43 @@
 import axios from "axios";
 import styled from "styled-components";
 import { SlPaperPlane } from "react-icons/sl";
-import { useState } from "react";
 
 import AllComments from "./AllComments";
+import { getAllComments } from "../functions/getAllComments";
+import { getFollowState } from "../functions/getFollowState";
+import React, { useEffect, useContext, useState } from "react";
+import { AuthContext } from "../../container/providers/auth";
 
-function CommentsBody({ user_id, post_id, follow_state, picture_url }) {
+function CommentsBody({ post_id, author_id }) {
+    const { user_id, picture_url } = useContext(AuthContext);
     const [sendComment, setSendComment] = useState({
         comment: "",
         user_id,
         post_id,
-        follow_state,
     });
 
     const [disabled, setDisabled] = useState(false);
 
+    const [infoComments, setInfoComments] = useState([]);
+
+    async function getAllComments(post_id, user_id) {
+        try {
+            const requisition = await axios.get(
+                `${process.env.REACT_APP_HOST_URL}/comments/${post_id}/${user_id}`
+            );
+            setInfoComments(requisition.data.comments);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    useEffect(() => {
+        getAllComments(post_id, user_id);
+    }, []);
+
     function clearInputs() {
         setSendComment({
             comment: "",
-            user_id,
-            post_id,
-            follow_state,
         });
     }
 
@@ -42,7 +59,31 @@ function CommentsBody({ user_id, post_id, follow_state, picture_url }) {
 
     return (
         <Body>
-            {false && <AllComments />}
+            {true &&
+                infoComments.map((value, index) => {
+                    const {
+                        id,
+                        comment_user_id,
+                        comment_text,
+                        comment_username,
+                        comment_picture_url,
+                        follower,
+                    } = value;
+
+                    return (
+                        <AllComments
+                            key={index}
+                            comment_id={id}
+                            comment_user_id={comment_user_id}
+                            comment_username={comment_username}
+                            comment_picture_url={comment_picture_url}
+                            comment_text={comment_text}
+                            follower={follower}
+                            author_id={author_id}
+                            user_id={user_id}
+                        />
+                    );
+                })}
             <SendComment onSubmit={submitForm}>
                 <Avatar src={picture_url} />
                 <Comment

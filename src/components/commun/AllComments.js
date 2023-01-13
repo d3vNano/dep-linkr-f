@@ -1,16 +1,25 @@
 import styled from "styled-components";
 
-function AllComments({}) {
+function AllComments({
+    comment_id,
+    comment_user_id,
+    comment_username,
+    comment_picture_url,
+    comment_text,
+    follower,
+    author_id,
+    user_id,
+}) {
     function RenderComment() {
         return (
             <>
                 <Body>
                     <Avatar>
-                        <img src=""></img>
+                        <img src={comment_picture_url}></img>
                     </Avatar>
                     <UserComment>
                         <Dates>
-                            <Nick>{}</Nick>
+                            <Nick>{comment_username}</Nick>
                             {/*
                             follow_var || user_id_var ?
                             <Stats>
@@ -22,10 +31,15 @@ function AllComments({}) {
                             */}
                             <Stats>
                                 <p>•</p>
-                                <h2>following</h2>
+                                <h2>
+                                    {follower === true && "following"}
+                                    {follower === false &&
+                                        author_id === comment_user_id &&
+                                        "post's author"}
+                                </h2>
                             </Stats>
                         </Dates>
-                        <Comment>{}</Comment>
+                        <Comment>{comment_text}</Comment>
                     </UserComment>
                 </Body>
                 <Spacer />

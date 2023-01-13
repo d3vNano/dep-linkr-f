@@ -1,8 +1,11 @@
+import axios from "axios";
 import styled from "styled-components";
-import React, { useState } from "react";
 import { ReactTagify } from "react-tagify";
 import { useNavigate } from "react-router-dom";
 import { SlHeart } from "react-icons/sl";
+
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../container/providers/auth";
 
 import CommentsBody from "./CommentsBody";
 
@@ -21,6 +24,7 @@ export default function Post({
     likes,
 }) {
     const navigate = useNavigate();
+
     return (
         <PostBox key={key}>
             <PostBody>
@@ -60,12 +64,7 @@ export default function Post({
                     </LinkBox>
                 </InfosBox>
             </PostBody>
-            <CommentsBody
-                username={username}
-                user_id={username_id}
-                post_id={post_id}
-                picture_url={picture_url}
-            />
+            <CommentsBody author_id={username_id} post_id={post_id} />
         </PostBox>
     );
 }
