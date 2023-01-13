@@ -76,6 +76,7 @@ function Timeline() {
                                         metaTitle={metaTitle}
                                         metaDescription={metaDescription}
                                         metaImage={metaImage}
+                                        post_id={id}
                                     />
                                 );
                             })
