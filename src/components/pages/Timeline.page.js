@@ -16,8 +16,7 @@ function Timeline() {
     async function getPostsList() {
         try {
             const requisition = await axios.get(
-                `${process.env.REACT_APP_HOST_URL}/timeline
-            `,
+                `${process.env.REACT_APP_HOST_URL}/timeline`,
                 {
                     headers: {
                         authorization: `Bearer ${token}`,
